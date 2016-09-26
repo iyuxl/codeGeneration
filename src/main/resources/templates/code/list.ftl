@@ -2,7 +2,7 @@
     <caption>${table}字段明细</caption>
     <thead>
     <tr>
-        <th>操作</th>
+        <th colspan="3">操作</th>
         <th>columnName</th>
         <th>dataType</th>
         <th>columnType</th>
@@ -17,8 +17,10 @@
         <td>
             <input type="hidden" name="lists[${obj_index}].columnName" value="${obj.columnName}"/>
             <input type="checkbox" class="ttt" name="lists[${obj_index}].condition" value="false"/>条件
+            </td><td>
             <input type="checkbox" class="ttt"  name="lists[${obj_index}].list" value="false"/>列表
-            <input type="checkbox" class="ttt"  name="lists[${obj_index}].add" value="false"/>添加
+         </td><td>   <input type="checkbox" class="ttt"  name="lists[${obj_index}].add" value="false"/>添加
+
         </td>
         <td>${obj.columnName}</td>
         <td>${obj.dataType}</td>
