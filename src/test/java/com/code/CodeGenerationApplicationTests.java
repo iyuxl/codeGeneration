@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.code.domain.Columns;
 import com.code.service.ColumnsService;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -48,6 +50,12 @@ public class CodeGenerationApplicationTests {
 
 		List<Columns> ll = columnsService.getAllColumns("DEPT", "offportal");
 		System.out.println(JSON.toJSONString(ll));*/
+		double a=5.0/0;
+		System.out.println("a="+a);
+		Map<String, Object> maps = Maps.newConcurrentMap();
+		maps.put("tt", a);
+		String tmp=JSON.toJSONString(maps);
+		System.out.println("a="+tmp);
 
 	}
 

@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.controller;
+package ${PACKAGE_NAME}.controller.${MK};
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,9 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springside.modules.web.Servlets;
 
 import com.google.common.collect.Lists;
-import ${PACKAGE_NAME}.domain.${CLASS_NAME};
+import ${PACKAGE_NAME}.entity.${MK}.${CLASS_NAME};
 import ${PACKAGE_NAME}.exception.ServiceException;
-import ${PACKAGE_NAME}.service.${CLASS_NAME}Service;
+import ${PACKAGE_NAME}.service.${MK}.${CLASS_NAME}Service;
 import com.xkx.domain.ResultBean;
 import com.xkx.utils.CommUtil;
 
@@ -49,7 +49,7 @@ public class ${CLASS_NAME}Controller extends BaseController {
         // 将搜索条件编码成字符串，用于排序，分页的URL
         model.addAttribute("searchParams", Servlets.encodeParameterStringWithPrefix(searchParams, "search_"));
         model.addAttribute("pUrl", "/bk/${CLASS_NAME_LINK}/list");
-        return "/bk/normal/${CLASS_NAME_LINK}/list";
+        return "/bk/${CLASS_NAME_LINK}/list";
     }
 
     @RequestMapping(value = "/${CLASS_NAME_LINK}/create", method = RequestMethod.POST)
@@ -59,10 +59,11 @@ public class ${CLASS_NAME}Controller extends BaseController {
             IBQSession bq = CommUtil.getSession(this.request);
             if(obj.getId() == null)
             {
-                obj.setCreator(bq.getOp().getId().intValue());
+                obj.setCreator(bq.getOp().getLogin());
                 ${CLASS_NAME_LINK}Service.createSave(obj);
             } else {
                 //TODO 设置修改人
+                obj.setUpdater(bq.getOp().getLogin());
                 ${CLASS_NAME_LINK}Service.updateSave(obj);
             }
         } catch (ServiceException e) {
@@ -81,6 +82,6 @@ public class ${CLASS_NAME}Controller extends BaseController {
     public ModelAndView update(@PathVariable(value = "id") ${PRI} id, Model model) {
         ${CLASS_NAME} obj = ${CLASS_NAME_LINK}Service.getObj(id);
         model.addAttribute("obj", obj);
-        return new ModelAndView("/bk/normal/${CLASS_NAME_LINK}/add");
+        return new ModelAndView("/bk/${CLASS_NAME_LINK}/add");
      }
 }

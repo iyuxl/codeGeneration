@@ -15,6 +15,16 @@ public class Columns {
     private String tableName;
     private Long characterMaximumLength;
 
+    public String getIsNullable() {
+        return isNullable;
+    }
+
+    public void setIsNullable(String isNullable) {
+        this.isNullable = isNullable;
+    }
+
+    private String isNullable;
+
     public String getColumnType() {
         return columnType;
     }

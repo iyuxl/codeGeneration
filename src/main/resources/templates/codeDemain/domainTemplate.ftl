@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.domain;
+package ${PACKAGE_NAME}.domain.${MK};
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,6 +22,7 @@ public class ${CLASS_NAME} implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	</#if>
+	//${data.columnComment}
 	private ${data.data_Type} ${data.column_Name};
 		
 	public void set${data.methodName}(${data.data_Type} ${data.column_Name}) {

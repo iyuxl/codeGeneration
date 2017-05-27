@@ -22,6 +22,16 @@ public class ColumnsList {
     private String tableName;
     private String tableSchema;
 
+    public String getMk() {
+        return mk;
+    }
+
+    public void setMk(String mk) {
+        this.mk = mk;
+    }
+
+    private String mk;
+
     public String getTableName() {
         return tableName;
     }

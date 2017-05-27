@@ -31,8 +31,9 @@ import java.util.Map;
 @Service
 public class ColumnsService {
     private static final String QUERY = "select COLUMN_NAME,DATA_TYPE,COLUMN_TYPE,"
-            + "COLUMN_COMMENT,COLUMN_KEY,TABLE_NAME,CHARACTER_MAXIMUM_LENGTH from COLUMNS"
+            + "COLUMN_COMMENT,COLUMN_KEY,TABLE_NAME,CHARACTER_MAXIMUM_LENGTH,IS_NULLABLE from COLUMNS"
             + " WHERE table_name = ? AND table_schema = ?;";
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -57,13 +58,14 @@ public class ColumnsService {
                 obj.setColumnKey(resultSet.getString("COLUMN_KEY"));
                 obj.setColumnComment(resultSet.getString("COLUMN_COMMENT"));
                 obj.setCharacterMaximumLength(resultSet.getLong("CHARACTER_MAXIMUM_LENGTH"));
+                obj.setIsNullable(resultSet.getString("IS_NULLABLE"));
                 lists.add(obj);
             }
         });
         return lists;
     }
 
-    public void saveCode(ColumnsList obj) throws Exception {
+    public void saveCode(ColumnsList obj, boolean leaf) throws Exception {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
         //cfg.setDirectoryForTemplateLoading(ResourceUtils.getFile("templates/codeDemain"));
         cfg.setClassLoaderForTemplateLoading(this.getClass().getClassLoader(), "/templates/codeDemain");
@@ -88,22 +90,23 @@ public class ColumnsService {
         maps.put("CLASS_NAME", obj.getClassName());
         maps.put("CLASS_NAME_LINK", CommonUtil.geneUnKey(obj.getClassName()));
         maps.put("TABLE_NAME", obj.getTableName());
+        maps.put("MK", obj.getMk());
         maps.put("datas", objs);
         String tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
-        File f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/domain/"  + obj.getClassName() + ".java");
+        File f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/entity/" + obj.getMk() + "/"  + obj.getClassName() + ".java");
         FileUtils.writeStringToFile(f, tempJava, "utf-8");
         System.out.println(obj.getClassName() + "Entity生成完毕");
         //TODO 生成Dao
         template = cfg.getTemplate("daoTemplate.ftl", "utf-8");
         tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
-        f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/repository/" + obj.getClassName().trim() + "Dao.java");
+        f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/repository/" + obj.getMk() + "/"  + obj.getClassName().trim() + "Dao.java");
         FileUtils.writeStringToFile(f, tempJava, "utf-8");
         System.out.println("Dao代码生成成功");
         //TODO 生成Service
         if (obj.isService()) {
             template = cfg.getTemplate("serviceTemplate.ftl", "utf-8");
             tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
-            f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/service/" + obj.getClassName().trim() + "Service.java");
+            f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/service/" + obj.getMk() + "/"  + obj.getClassName().trim() + "Service.java");
             FileUtils.writeStringToFile(f, tempJava, "utf-8");
             System.out.println("Service代码生成成功");
         }
@@ -111,7 +114,7 @@ public class ColumnsService {
         if (obj.isController()) {
             template = cfg.getTemplate("controllerTemplate.ftl", "utf-8");
             tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
-            f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/controller/" + obj.getClassName().trim() + "Controller.java");
+            f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/controller/" + obj.getMk() + "/"  + obj.getClassName().trim() + "Controller.java");
             FileUtils.writeStringToFile(f, tempJava, "utf-8");
             System.out.println("Controller代码生成成功");
         }
@@ -129,9 +132,15 @@ public class ColumnsService {
         }
         if (!inits.isEmpty()) {
             maps.put("inits", inits);
-            template = cfg.getTemplate("initTemplate.ftl", "utf-8");
-            tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
-            f = new File(outpath + "/" + obj.getClassName().trim() + "/init.jsp");
+            if (leaf) {
+                template = cfg.getTemplate("initTemplate_lf.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/init.html");
+            } else {
+                template = cfg.getTemplate("initTemplate.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/init.jsp");
+            }
             FileUtils.writeStringToFile(f, tempJava, "utf-8");
             System.out.println("init.jsp代码生成成功");
         }
@@ -149,9 +158,15 @@ public class ColumnsService {
         }
         if (!lists.isEmpty()) {
             maps.put("lists", lists);
-            template = cfg.getTemplate("listTemplate.ftl", "utf-8");
-            tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
-            f = new File(outpath + "/" + obj.getClassName().trim() + "/list.jsp");
+            if (leaf) {
+                template = cfg.getTemplate("listTemplate_lf.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/list.html");
+            } else {
+                template = cfg.getTemplate("listTemplate.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/list.jsp");
+            }
             FileUtils.writeStringToFile(f, tempJava, "utf-8");
             System.out.println("list.jsp代码生成成功");
         }
@@ -169,9 +184,15 @@ public class ColumnsService {
         }
         if (!adds.isEmpty()) {
             maps.put("adds", adds);
-            template = cfg.getTemplate("addTemplate.ftl", "utf-8");
-            tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
-            f = new File(outpath + "/" + obj.getClassName().trim() + "/add.jsp");
+            if (leaf) {
+                template = cfg.getTemplate("addTemplate_lf.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/add.html");
+            } else {
+                template = cfg.getTemplate("addTemplate.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/add.jsp");
+            }
             FileUtils.writeStringToFile(f, tempJava, "utf-8");
             System.out.println("add.jsp代码生成成功");
         }

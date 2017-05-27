@@ -1,4 +1,4 @@
-package ${PACKAGE_NAME}.service;
+package ${PACKAGE_NAME}.service.${MK};
 
 import java.util.Date;
 import java.util.Map;
@@ -17,9 +17,11 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springside.modules.utils.Exceptions;
+import com.alibaba.fastjson.JSON;
 
 import ${PACKAGE_NAME}.exception.ServiceException;
-import ${PACKAGE_NAME}.repository.${CLASS_NAME}Dao;
+import ${PACKAGE_NAME}.entity.${MK}.${CLASS_NAME};
+import ${PACKAGE_NAME}.repository.${MK}.${CLASS_NAME}Dao;
 import com.xkx.service.base.BaseService;
 import com.xkx.domain.ResultBean;
 import com.xkx.utils.BQDynamicSpecifications;
@@ -53,7 +55,7 @@ public class ${CLASS_NAME}Service extends BaseService {
 
     public ${CLASS_NAME} getObj(${PRI} id) {
         if(LOG.isDebugEnabled()) {
-            LOG.debug("find obj: {}", id);
+            LOG.debug("find obj:  " + id);
         }
         return ${CLASS_NAME_LINK}Dao.findOne(id);
     }
@@ -61,12 +63,11 @@ public class ${CLASS_NAME}Service extends BaseService {
     /**
      * 新增保存
      * @param obj
-     * @param roles
      */
     @Transactional
     public void createSave(${CLASS_NAME} obj) {
         if(LOG.isDebugEnabled()) {
-            LOG.debug("save obj: {}", JSON.toJSONString(obj, true));
+            LOG.debug("save obj: " + JSON.toJSONString(obj, true));
         }
         ${CLASS_NAME_LINK}Dao.save(obj);
     }
@@ -74,16 +75,16 @@ public class ${CLASS_NAME}Service extends BaseService {
     /**
      * 修改保存
      * @param obj
-     * @param roles
      */
     @Transactional
     public void updateSave(${CLASS_NAME} obj) {
         if(LOG.isDebugEnabled()) {
-            LOG.debug("update obj: {}", JSON.toJSONString(obj, true));
+            LOG.debug("update obj: " + JSON.toJSONString(obj, true));
         }
-        ${CLASS_NAME} demain = getObj(obj.getId());
+        ${CLASS_NAME} domain = getObj(obj.getId());
         //TODO 将不被修改的值赋值给obj
-        ${CLASS_NAME_LINK}Dao.save(obj);
+        XBeanMapper.copy(obj, domain);
+        ${CLASS_NAME_LINK}Dao.save(domain);
     }
 
     /**
@@ -93,9 +94,11 @@ public class ${CLASS_NAME}Service extends BaseService {
     @Transactional
     public void deleteObjs(List<${PRI}> ids) {
         if(LOG.isDebugEnabled()) {
-            LOG.debug("delete objs: {}", JSON.toJSONString(ids, true));
+            LOG.debug("delete objs: " + JSON.toJSONString(ids, true));
         }
-        ${CLASS_NAME_LINK}Dao.delete(ids);
+        for (Long id:ids) {
+            ${CLASS_NAME_LINK}Dao.delete(id);
+        }
     }
 
     public Page<${CLASS_NAME}> getObjs(Map<String, Object> searchParams, int pageNumber, int pageSize, String sortType) {

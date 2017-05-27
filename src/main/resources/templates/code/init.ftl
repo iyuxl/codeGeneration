@@ -50,12 +50,18 @@
                     <div class="form-group">
                         <input type="text" class="form-control" id="packageName" name="packageName" placeholder="packageName">
                     </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="mk" name="mk" placeholder="模块">
+                        </div>
                     <div class="form-group">
                         <input type="checkbox" class="ttt" name="service" value="false"/>生成service
                     </div>
                     <div class="form-group">
                         <input type="checkbox" class="ttt" name="controller" value="false"/>生成controller
                     </div>
+                        <div class="form-group">
+                            <input type="checkbox" class="ttt" name="lf" value="false"/>目标thymeleaf
+                        </div>
                     <button type="button" class="btn btn-default" id="search_btn"
                             onclick="goGeneration('${ctx}/code/save', $('#listForm'))">生成</button>
                 </div>
