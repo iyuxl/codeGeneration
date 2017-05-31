@@ -27,6 +27,7 @@ import com.xkx.domain.ResultBean;
 import com.xkx.utils.BQDynamicSpecifications;
 import com.xkx.utils.BQSearchFilter;
 import com.xkx.utils.DateUtil;
+import com.xkx.utils.XBeanMapper;
 
 @Service
 public class ${CLASS_NAME}Service extends BaseService {

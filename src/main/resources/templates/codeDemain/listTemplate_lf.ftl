@@ -9,7 +9,8 @@
                     <#list lists as data>
                         <th>${data.columnComment}</th>
                     </#list>
-                        <th>操作</th>
+                        <th><a class="btn btn-success btn-circle" href="#" onclick="createObj('/bk/mg/${CLASS_NAME_LINK}/add')">新增</a>
+                        </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -22,7 +23,7 @@
                             </#if>
                         </td>
                         </#list>
-                        <td><a class="btn btn-default" href="#" th:onclick="'javascript:updateObj(&quot;/bk/${CLASS_NAME_LINK}/update/' + ${symbol}{obj.id } + '&quot;);'" title="修改">修改</a></td>
+                        <td><a class="btn btn-info btn-circle" href="#" th:onclick="'javascript:updateObj(&quot;/bk/${CLASS_NAME_LINK}/update/' + ${symbol}{obj.id } + '&quot;);'" title="修改">修改</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -30,14 +31,10 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-4">
-        <div class="row">
-            <div class="col-lg-3">
-                <a class="btn btn-default" href="#" onclick="createObj('/bk/mg/${CLASS_NAME_LINK}/add')">新增</a>
-            </div>
-        </div>
+    <div class="col-lg-4" style="padding-top: 20px;">
+        <a class="btn btn-success btn-circle" href="#" onclick="createObj('/bk/mg/${CLASS_NAME_LINK}/add')">新增</a>
     </div>
-    <div class="col-lg-8 text-right" style="padding-right: 15px;" th:replace="/bk/pagination::page">
+    <div class="col-lg-8 text-right" style="padding-right: 15px;" th:insert="/bk/pagination::page">
     </div>
 </div>
 </html>
