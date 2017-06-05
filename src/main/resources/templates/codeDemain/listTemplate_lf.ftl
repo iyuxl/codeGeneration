@@ -16,9 +16,9 @@
                 <tbody>
                     <tr th:each="obj : ${symbol}{objs.content}">
                         <#list lists as data>
-                        <td <#if data.data_Type == "Date"> th:utext="${symbol}{#dates.format(obj.${data.column_Name}, 'yyyy年MM月dd日 HH:mm:ss E')}">
-                            <#elseif data.data_Type == "String"> th:utext="${symbol}{obj.${data.column_Name}}">
-                            <#elseif data.columnKey == "PRI" > th:utext="${symbol}{obj.${data.column_Name}}">
+                        <td <#if data.data_Type == "Date"> th:text="${symbol}{#dates.format(obj.${data.column_Name}, 'yyyy年MM月dd日 HH:mm:ss E')}">
+                            <#elseif data.data_Type == "String"> th:text="${symbol}{obj.${data.column_Name}}">
+                            <#elseif data.columnKey == "PRI" > th:text="${symbol}{obj.${data.column_Name}}">
                             <#else > th:text="${symbol}{#numbers.formatDecimal(obj.${data.column_Name}, 1, 2)}">
                             </#if>
                         </td>
