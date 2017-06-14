@@ -26,6 +26,7 @@ import ${PACKAGE_NAME}.exception.ServiceException;
 import ${PACKAGE_NAME}.service.${MK}.${CLASS_NAME}Service;
 import com.xkx.domain.ResultBean;
 import com.xkx.utils.CommUtil;
+import com.xkx.utils.XkxServlets;
 
 @Controller
 @RequestMapping("/bk")
@@ -47,7 +48,7 @@ public class ${CLASS_NAME}Controller extends BaseController {
         Page<${CLASS_NAME}> objs = ${CLASS_NAME_LINK}Service.getObjs(searchParams, pageNumber, pageSize, sortType);
         model.addAttribute("objs", objs);
         // 将搜索条件编码成字符串，用于排序，分页的URL
-        model.addAttribute("searchParams", Servlets.encodeParameterStringWithPrefix(searchParams, "search_"));
+        model.addAttribute("searchParams", XkxServlets.encodeParameterStringWithPrefix(searchParams, "search_"));
         model.addAttribute("pUrl", "/bk/${CLASS_NAME_LINK}/list");
         return "/bk/${CLASS_NAME_LINK}/list";
     }
