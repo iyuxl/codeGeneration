@@ -3,6 +3,9 @@ package ${PACKAGE_NAME}.domain.${MK};
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+@DynamicUpdate
+@DynamicInsert
 @Entity
 @Table(name = "${TABLE_NAME}")
 public class ${CLASS_NAME} implements Serializable {
