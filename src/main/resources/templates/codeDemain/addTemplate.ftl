@@ -7,7 +7,7 @@ pageEncoding="UTF-8"%>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12" id="objContext">
-            <form role="form" id="objSaveForm">
+            <form role="form" id="objSaveForm" th:action="@{/bk/${CLASS_NAME_LINK}/create}">
                     <#list adds as data>
                     <#if data.columnKey == "PRI" >
                         <input type="hidden" name="${data.column_Name}" value="${symbol}{obj.${data.column_Name} }">

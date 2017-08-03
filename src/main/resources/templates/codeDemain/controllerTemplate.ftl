@@ -22,9 +22,7 @@ import org.springside.modules.web.Servlets;
 
 import com.google.common.collect.Lists;
 import ${PACKAGE_NAME}.entity.${MK}.${CLASS_NAME};
-import ${PACKAGE_NAME}.exception.ServiceException;
 import ${PACKAGE_NAME}.service.${MK}.${CLASS_NAME}Service;
-import com.xkx.domain.ResultBean;
 import com.xkx.utils.CommUtil;
 import com.xkx.utils.XkxServlets;
 

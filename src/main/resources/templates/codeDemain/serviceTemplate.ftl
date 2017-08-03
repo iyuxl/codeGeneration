@@ -19,11 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springside.modules.utils.Exceptions;
 import com.alibaba.fastjson.JSON;
 
-import ${PACKAGE_NAME}.exception.ServiceException;
 import ${PACKAGE_NAME}.entity.${MK}.${CLASS_NAME};
 import ${PACKAGE_NAME}.repository.${MK}.${CLASS_NAME}Dao;
-import com.xkx.service.base.BaseService;
-import com.xkx.domain.ResultBean;
 import com.xkx.utils.BQDynamicSpecifications;
 import com.xkx.utils.BQSearchFilter;
 import com.xkx.utils.DateUtil;
