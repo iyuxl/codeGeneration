@@ -29,7 +29,7 @@
                             </#if>
                         </#list>
                             <button type="button" class="btn btn-default" id="search_btn" onclick="goObjs()">查 询</button>
-                            <button type="button" class="btn btn-danger" onclick="clearForm('objForm')">查 询</button>
+                            <button type="button" class="btn btn-danger" onclick="clearForm('objForm')">清 空</button>
                         </div>
                     </div>
                 </form>
