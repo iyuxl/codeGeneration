@@ -65,6 +65,17 @@ public class ${CLASS_NAME}Controller extends BaseController {
                 obj.setUpdater(bq.getOp().getLogin());
                 ${CLASS_NAME_LINK}Service.updateSave(obj);
             }
+        } catch (JpaSystemException e){
+            rb.setFlag(false);
+            /**
+            * jpa乐观锁生效
+            */
+            if (e.getRootCause() instanceof StaleStateException)
+            {
+                rb.setMsg("该记录已被修改，请重新编辑");
+            } else {
+                rb.setMsg(CommUtil.GLOBAL_ERROR);
+            }
         } catch (ServiceException e) {
             rb.setFlag(false);
             rb.setMsg(e.getMessage());
