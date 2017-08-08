@@ -25,6 +25,7 @@ import com.xkx.utils.BQDynamicSpecifications;
 import com.xkx.utils.BQSearchFilter;
 import com.xkx.utils.DateUtil;
 import com.xkx.utils.XBeanMapper;
+import com.xkx.utils.XLog;
 
 @Service
 public class ${CLASS_NAME}Service extends BaseService {
@@ -63,6 +64,7 @@ public class ${CLASS_NAME}Service extends BaseService {
      * @param obj
      */
     @Transactional
+    @XLog(module = "${CLASS_NAME}管理", operation = "ADD")
     public void createSave(${CLASS_NAME} obj) {
         if(LOG.isDebugEnabled()) {
             LOG.debug("save obj: " + JSON.toJSONString(obj, true));
@@ -75,6 +77,7 @@ public class ${CLASS_NAME}Service extends BaseService {
      * @param obj
      */
     @Transactional
+    @XLog(module = "${CLASS_NAME}管理", operation = "MODIFY")
     public void updateSave(${CLASS_NAME} obj) {
         if(LOG.isDebugEnabled()) {
             LOG.debug("update obj: " + JSON.toJSONString(obj, true));
@@ -90,6 +93,7 @@ public class ${CLASS_NAME}Service extends BaseService {
      *
      */
     @Transactional
+    @XLog(module = "${CLASS_NAME}管理", operation = "DEL")
     public void deleteObjs(List<${PRI}> ids) {
         if(LOG.isDebugEnabled()) {
             LOG.debug("delete objs: " + JSON.toJSONString(ids, true));
