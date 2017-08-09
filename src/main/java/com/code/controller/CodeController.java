@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/code")
-public class CodeController {
+public class CodeController extends BaseController{
 
     private static  final Logger LOG = LoggerFactory.getLogger(CodeController.class);
     @Autowired
