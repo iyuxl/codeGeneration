@@ -19,12 +19,12 @@
                                 <div class="col-xs-3 col-md-3">
                                     <input type="text" name="search_GT_${data.column_Name}" id="x" placeholder="${data.columnComment}" title="${data.columnComment}"
                                            onClick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})"
-                                           class="form-control" th:value="${data.symbol}{param.search_GT_${data.column_Name}}">
+                                           class="form-control" th:value="${data.symbol}{param.search_GT_${data.column_Name}}" />
                                 </div>
                             <#else>
                                 <div class="col-xs-3 col-md-3">
                                     <input type="text" name="search_LIKE_${data.column_Name}" id="search_EQ_${data.column_Name}"
-                                           class="form-control" th:value="${data.symbol}{param.search_EQ_${data.column_Name}}">
+                                           class="form-control" th:value="${data.symbol}{param.search_EQ_${data.column_Name}}" />
                                 </div>
                             </#if>
                         </#list>
