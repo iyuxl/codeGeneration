@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 @DynamicUpdate
 @DynamicInsert
@@ -26,6 +27,9 @@ public class ${CLASS_NAME} implements Serializable {
 	<#if data.columnKey == "PRI">
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	</#if>
+	<#if data.column_Name == "versionNum">
+    @Version
 	</#if>
 	//${data.columnComment}
 	private ${data.data_Type} ${data.column_Name};
