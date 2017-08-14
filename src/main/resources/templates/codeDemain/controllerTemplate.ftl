@@ -48,7 +48,7 @@ public class ${CLASS_NAME}Controller extends BaseController {
         // 将搜索条件编码成字符串，用于排序，分页的URL
         model.addAttribute("searchParams", XkxServlets.encodeParameterStringWithPrefix(searchParams, "search_"));
         model.addAttribute("pUrl", "/bk/${CLASS_NAME_LINK}/list");
-        return "/bk/${CLASS_NAME_LINK}/list";
+        return "bk/${CLASS_NAME_LINK}/list";
     }
 
     @RequestMapping(value = "/${CLASS_NAME_LINK}/create", method = RequestMethod.POST)
@@ -92,6 +92,6 @@ public class ${CLASS_NAME}Controller extends BaseController {
     public ModelAndView update(@PathVariable(value = "id") ${PRI} id, Model model) {
         ${CLASS_NAME} obj = ${CLASS_NAME_LINK}Service.getObj(id);
         model.addAttribute("obj", obj);
-        return new ModelAndView("/bk/${CLASS_NAME_LINK}/add");
+        return new ModelAndView("bk/${CLASS_NAME_LINK}/add");
      }
 }
