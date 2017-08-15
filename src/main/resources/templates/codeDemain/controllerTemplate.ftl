@@ -6,12 +6,14 @@ import java.util.Map;
 
 import javax.servlet.ServletRequest;
 
+import org.hibernate.StaleStateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +27,8 @@ import ${PACKAGE_NAME}.entity.${MK}.${CLASS_NAME};
 import ${PACKAGE_NAME}.service.${MK}.${CLASS_NAME}Service;
 import com.xkx.utils.CommUtil;
 import com.xkx.utils.XkxServlets;
+import com.si.controller.system.BaseController;
+import com.si.interceptors.IBQSession;
 
 @Controller
 @RequestMapping("/bk")
