@@ -11,7 +11,7 @@
                     <div class="form-group">
                         <label><#if data.isNullable == "NO">*</#if>${data.columnComment}:</label>
                         <input type="text" name="${data.column_Name}" title="${data.columnComment}" placeholder="${data.columnComment}" th:value="*{obj != null}? *{obj.${data.column_Name}} : ''"
-                               class="form-control" notnull="<#if data.isNullable == "NO">true</#if>" />
+                               class="form-control" notnull="<#if data.isNullable == "NO">true</#if>" comment="${data.columnComment}"/>
                     </div>
                     </#if>
                     </#list>
