@@ -98,4 +98,23 @@ public class ${CLASS_NAME}Controller extends BaseController {
         model.addAttribute("obj", obj);
         return new ModelAndView("bk/${CLASS_NAME_LINK}/add");
      }
+
+
+    @RequestMapping(value = "/${CLASS_NAME_LINK}/delete/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultBean delete(@PathVariable(value = "id") Long id) {
+    ResultBean rb = new ResultBean(true, "");
+    try {
+        ${CLASS_NAME_LINK}Service.deleteObjs(Lists.newArrayList(id));
+    } catch (ServiceException e) {
+        rb.setFlag(false);
+        rb.setMsg(e.getMessage());
+        log.error("${CLASS_NAME}删除异常", e);
+    } catch (Exception e) {
+        rb.setFlag(false);
+        rb.setMsg(CommUtil.GLOBAL_ERROR);
+        log.error("${CLASS_NAME}删除异常", e);
+    }
+        return rb;
+    }
 }
