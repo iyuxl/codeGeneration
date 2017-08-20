@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-sm-12">
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -31,10 +31,10 @@
     </div>
 </div>
 <div class="row" style="background: #f5f5f5;">
-    <div class="col-lg-4" style="margin-top: 13px;">
+    <div class="col-sm-4" style="margin-top: 13px;">
         <a class="btn btn-success btn-sm" href="#" onclick="createObj('/bk/mg/${CLASS_NAME_LINK}/add" style="width:74px;">新增</a>
     </div>
-    <div class="col-lg-8 text-right" style="padding-right: 15px;" th:insert="/bk/pagination::page">
+    <div class="col-sm-8 text-right" style="padding-right: 15px;" th:insert="/bk/pagination::page">
     </div>
 </div>
 </html>

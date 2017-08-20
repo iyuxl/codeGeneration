@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <form  action="#" id="objForm"  onsubmit="return false;" >
