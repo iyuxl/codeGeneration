@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped">
+            <table id="dataTables-example" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
                 <#list lists as data>
