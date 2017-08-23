@@ -6,7 +6,7 @@ pageEncoding="UTF-8"%>
 <c:set var="ctx" value="${symbol}{pageContext.request.contextPath}" />
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12" id="objContext">
+        <div class="col-sm-12" id="objContext">
             <form role="form" id="objSaveForm">
                     <#list adds as data>
                     <#if data.columnKey == "PRI" >

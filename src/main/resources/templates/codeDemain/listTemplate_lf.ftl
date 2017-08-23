@@ -30,7 +30,7 @@
         </div>
     </div>
 </div>
-<div class="row" style="background: #f5f5f5;">
+<div id="bbar" class="row" style="background:#f5f5f5;margin-left:0px;">
     <div class="col-sm-4" style="margin-top: 13px;">
         <a class="btn btn-success btn-sm" href="#" onclick="createObj('/bk/mg/${CLASS_NAME_LINK}/add')" style="width:74px;">新增</a>
     </div>
