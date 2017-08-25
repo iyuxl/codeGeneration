@@ -34,7 +34,7 @@
     <div class="col-sm-4" style="margin-top: 13px;">
         <a class="btn btn-success btn-sm" href="#" onclick="createObj('/bk/mg/${CLASS_NAME_LINK}/add')" style="width:74px;">新增</a>
     </div>
-    <div class="col-sm-8 text-right" style="padding-right: 15px;" th:insert="/bk/pagination::page">
+    <div class="col-sm-8 text-right" style="padding-right: 15px;" th:insert="bk/pagination::page">
     </div>
 </div>
 </html>
