@@ -4,7 +4,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 <c:set var="ctx" value="${symbol}{pageContext.request.contextPath}" />
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-sm-12">
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -41,14 +41,14 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-sm-4">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-sm-3">
                 <a class="btn btn-default" href="#" onclick="createObj('${symbol}{ctx}/bk/mg/${CLASS_NAME_LINK}/add')">新增</a>
             </div>
         </div>
     </div>
-    <div class="col-lg-8 text-right" style="padding-right: 15px;">
+    <div class="col-sm-8 text-right" style="padding-right: 15px;">
         <tags:pagination page="${symbol}{objs}" paginationSize="9" />
     </div>
 </div>
