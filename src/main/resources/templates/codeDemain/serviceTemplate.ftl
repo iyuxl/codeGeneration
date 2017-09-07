@@ -108,4 +108,9 @@ public class ${CLASS_NAME}Service extends BaseService {
         Specification<${CLASS_NAME}> spec = buildSpecification(searchParams);
         return ${CLASS_NAME_LINK}Dao.findAll(spec, pageRequest);
     }
+
+    public List<${CLASS_NAME}> getObjs(Map<String, Object> searchParams) {
+        Specification<${CLASS_NAME}> spec = buildSpecification(searchParams);
+        return ${CLASS_NAME_LINK}Dao.findAll(spec, new Sort(Direction.DESC, "created"));
+    }
 }

@@ -31,11 +31,6 @@
 <%@ include file="/WEB-INF/views/bk/normal/layout.jsp"%>
 <script type="text/javascript" src="${symbol}{ctx }/my97datepicker/WdatePicker.js"></script>
 <script type="text/javascript">
-    $('#search_EQ_xxx').keydown(function(event) {
-        if (event.keyCode == 13) {
-            goObjs();
-        }
-    });
     function goObjs() {
         showWait();
         var param = $("#objForm").serialize();
@@ -53,6 +48,13 @@
     }
 
     $(document).ready(function() {
+        $('#objForm input').each(function () {
+            $(this).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    goObjs();
+                }
+            });
+        });
         goObjs();
     });
 </script>
