@@ -12,14 +12,14 @@
         <li class="active">当前目录名称</li>
     </ul>
     <div class="page-content">
-        <div class="page-content-area">
+        <#--<div class="page-content-area">
             <div class="page-header">
                 <h1>当前目录名称
                     <small><i class="ace-icon fa fa-angle-double-right"></i>
                         页面内容简介
                     </small></h1>
             </div>
-        </div>
+        </div>-->
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default">
@@ -57,15 +57,10 @@
     </div>
 </div>
 <script type="text/javascript">
-    $('#search_EQ_xxx').keydown(function(event) {
-        if (event.keyCode == 13) {
-            goObjs();
-        }
-    });
     function goObjs() {
         showWait();
         var param = $("#objForm").serialize();
-        $("#listResult").load("/bk/${CLASS_NAME_LINK}/list", param, function() {
+        $("#listResult").load("[[@{/bk/${CLASS_NAME_LINK}/list}]]", param, function() {
             closeWait();
         });
     }
@@ -79,6 +74,13 @@
     }
 
     $(document).ready(function() {
+        ('#objForm input').each(function () {
+            $(this).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    goObjs();
+                }
+            });
+        });
         goObjs();
     });
 </script>
