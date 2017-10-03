@@ -46,6 +46,8 @@
                     <div class="row">
                     <div class="form-group">
                         <input type="text" class="form-control" id="className" name="className" placeholder="类名">
+                    </div><div class="form-group">
+                        <input type="text" class="form-control" id="menuName" name="menuName" placeholder="菜单名">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="packageName" name="packageName" placeholder="packageName">

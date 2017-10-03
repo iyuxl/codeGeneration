@@ -88,6 +88,7 @@ public class ColumnsService {
         maps.put("symbol", "$");
         maps.put("PACKAGE_NAME", obj.getPackageName());
         maps.put("CLASS_NAME", obj.getClassName());
+        maps.put("MENUNAME", obj.getMenuName());
         maps.put("CLASS_NAME_LINK", CommonUtil.geneUnKey(obj.getClassName()));
         maps.put("TABLE_NAME", obj.getTableName());
         maps.put("MK", obj.getMk());

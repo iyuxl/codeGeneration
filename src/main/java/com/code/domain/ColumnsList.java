@@ -22,6 +22,16 @@ public class ColumnsList {
     private String tableName;
     private String tableSchema;
 
+    public String getMenuName() {
+        return menuName;
+    }
+
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
+    }
+
+    private String menuName;
+
     public String getMk() {
         return mk;
     }
