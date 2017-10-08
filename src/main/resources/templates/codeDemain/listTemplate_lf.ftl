@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="row">
     <div class="col-sm-12">
+<#--
         <div class="table-responsive">
+-->
             <table id="dataTables-example" class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
@@ -32,13 +34,15 @@
                 </tr>
                 </tbody>
             </table>
+<#--
         </div>
+-->
     </div>
 </div>
-<div id="bbar" class="row" style="background:#f5f5f5;margin-left:0px;">
-    <div class="col-sm-4" style="margin-top: 13px;">
+<div id="bbar" class="row pagination-row ">
+    <div class="col-sm-4 pagination-button">
         <a th:replace="bk/button::goEditGreen2(@{/bk/mg/${CLASS_NAME_LINK}/add}, "新增${MENUNAME}")"/>
     </div>
-    <div class="col-sm-8 text-right" style="padding-right: 15px;" th:insert="bk/pagination::page"/>
+    <div class="col-sm-8 text-right pagination-right" th:insert="bk/pagination::page"/>
 </div>
 </html>
