@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="breadcrumbs">
-    <ul th:replace="bk/ul::breadcrumb('主页面', '**管理', "${MENUNAME}管理")"/>
+    <ul th:replace="bk/ul::breadcrumb('主页面', '**管理', '${MENUNAME}管理')"/>
     <div class="page-content">
         <div class="row">
             <div class="col-sm-12">
