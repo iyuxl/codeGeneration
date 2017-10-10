@@ -12,7 +12,7 @@
                     <th>${data.columnComment}</th>
                 </#list>
                     <th>
-                        <a th:replace="bk/button::goEditGreen(@{/bk/mg/${CLASS_NAME_LINK}/add}, "新增${MENUNAME}")"/>
+                        <a th:replace="bk/button::goEditGreen(@{/bk/mg/${CLASS_NAME_LINK}/add}, '新增${MENUNAME}')"/>
                     </th>
                 </tr>
                 </thead>
@@ -28,7 +28,7 @@
                     </td>
                 </#list>
                     <td>
-                        <a th:replace="bk/button::goEditYellow(@{/bk/${CLASS_NAME_LINK}/update/} + ${symbol}{obj.id }, "修改${MENUNAME}")"/>
+                        <a th:replace="bk/button::goEditYellow(@{/bk/${CLASS_NAME_LINK}/update/} + ${symbol}{obj.id }, '修改${MENUNAME}')"/>
                         <a th:replace="bk/button::goDel(@{/bk/${CLASS_NAME_LINK}/delete/} + ${symbol}{obj.id }, 'objForm', ${symbol}{@sys.getDel()})"/>
                     </td>
                 </tr>
@@ -41,7 +41,7 @@
 </div>
 <div id="bbar" class="row pagination-row ">
     <div class="col-sm-4 pagination-button">
-        <a th:replace="bk/button::goEditGreen2(@{/bk/mg/${CLASS_NAME_LINK}/add}, "新增${MENUNAME}")"/>
+        <a th:replace="bk/button::goEditGreen2(@{/bk/mg/${CLASS_NAME_LINK}/add}, '新增${MENUNAME}')"/>
     </div>
     <div class="col-sm-8 text-right pagination-right" th:insert="bk/pagination::page"/>
 </div>
