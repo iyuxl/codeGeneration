@@ -30,6 +30,10 @@ import com.xkx.utils.XkxServlets;
 import com.si.controller.system.BaseController;
 import com.si.interceptors.IBQSession;
 
+
+/**
+ *  ${CLASS_NAME}web操作相关方法
+ */
 @Controller
 @RequestMapping("/bk")
 public class ${CLASS_NAME}Controller extends BaseController {
@@ -38,6 +42,15 @@ public class ${CLASS_NAME}Controller extends BaseController {
     @Autowired
     private ${CLASS_NAME}Service ${CLASS_NAME_LINK}Service;
 
+    /**
+     * 列表查询
+     * @param pageNumber
+     * @param pageSize
+     * @param sortType
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/${CLASS_NAME_LINK}/list")
     public String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
         @RequestParam(value = "page.size", defaultValue = CommUtil.PAGE_SIZE) int pageSize,
@@ -55,6 +68,11 @@ public class ${CLASS_NAME}Controller extends BaseController {
         return "bk/${CLASS_NAME_LINK}/list";
     }
 
+    /**
+     * 编辑保存
+     * @param obj
+     * @return
+     */
     @RequestMapping(value = "/${CLASS_NAME_LINK}/create", method = RequestMethod.POST)
     public @ResponseBody ResultBean create(${CLASS_NAME} obj) {
         ResultBean rb = new ResultBean(true, "");
@@ -92,6 +110,12 @@ public class ${CLASS_NAME}Controller extends BaseController {
         return rb;
     }
 
+    /**
+     * 查询编辑信息
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/${CLASS_NAME_LINK}/update/{id}", method = RequestMethod.GET)
     public ModelAndView update(@PathVariable(value = "id") ${PRI} id, Model model) {
         ${CLASS_NAME} obj = ${CLASS_NAME_LINK}Service.getObj(id);
@@ -99,7 +123,11 @@ public class ${CLASS_NAME}Controller extends BaseController {
         return new ModelAndView("bk/${CLASS_NAME_LINK}/add");
      }
 
-
+    /**
+     * 删除信息
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/${CLASS_NAME_LINK}/delete/{id}", method = RequestMethod.GET)
     @ResponseBody
     public ResultBean delete(@PathVariable(value = "id") Long id) {

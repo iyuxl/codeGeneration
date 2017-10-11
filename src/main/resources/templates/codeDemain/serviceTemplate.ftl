@@ -103,12 +103,25 @@ public class ${CLASS_NAME}Service extends BaseService {
         }
     }
 
+    /**
+     * 分页查询
+     * @param searchParams
+     * @param pageNumber
+     * @param pageSize
+     * @param sortType
+     * @return
+     */
     public Page<${CLASS_NAME}> getObjs(Map<String, Object> searchParams, int pageNumber, int pageSize, String sortType) {
         PageRequest pageRequest = buildPageRequest(pageNumber, pageSize, sortType);
         Specification<${CLASS_NAME}> spec = buildSpecification(searchParams);
         return ${CLASS_NAME_LINK}Dao.findAll(spec, pageRequest);
     }
 
+    /**
+     * 列表查询
+     * @param searchParams
+     * @return
+     */
     public List<${CLASS_NAME}> getObjs(Map<String, Object> searchParams) {
         Specification<${CLASS_NAME}> spec = buildSpecification(searchParams);
         return ${CLASS_NAME_LINK}Dao.findAll(spec, new Sort(Direction.DESC, "created"));
