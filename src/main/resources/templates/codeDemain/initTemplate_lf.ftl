@@ -12,16 +12,16 @@
                                 <div class="row">
                                 <#list inits as data>
                                     <#if data.data_Type == "Date">
-                                        <div class="col-xs-3 col-md-3" style="margin-top:4px;">
-                                            <input type="text" name="search_GT_${data.column_Name}" id="x"
+                                        <div class="col-xs-3 col-md-3 initDiv">
+                                            <input type="text" name="search_GT_${data.column_Name}" id="search_GT_${data.column_Name}"
                                                    placeholder="${data.columnComment}" title="${data.columnComment}"
                                                    onClick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})"
                                                    class="form-control"  placeholder="请输入${data.columnComment}"
                                                    th:value="${data.symbol}{param.search_GT_${data.column_Name}}"/>
                                         </div>
                                     <#else>
-                                        <div class="col-xs-3 col-md-3" style="margin-top:4px;">
-                                            <input type="text" name="search_LIKE_${data.column_Name}"
+                                        <div class="col-xs-3 col-md-3 initDiv">
+                                            <input type="text" name="search_EQ_${data.column_Name}"
                                                    id="search_EQ_${data.column_Name}"
                                                    class="form-control"  placeholder="请输入${data.columnComment}"
                                                    th:value="${data.symbol}{param.search_EQ_${data.column_Name}}"/>
