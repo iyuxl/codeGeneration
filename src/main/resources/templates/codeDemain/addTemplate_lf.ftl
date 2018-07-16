@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="container-fluid">
     <div class="row" id="objContext">
-        <form class="form-horizontal" role="form" id="objSaveForm" th:action="@{/bk/${CLASS_NAME_LINK}/create}" onsubmit="return false;">
+        <form class="form-horizontal" role="form" id="objSaveForm" th:action="@{/bk/${CLASS_NAME_LINK}/create}"
+              onsubmit="return false;">
         <#list adds as data>
             <#if data.columnKey == "PRI" >
                 <input type="hidden" name="${data.column_Name}"
@@ -22,7 +23,10 @@
             </#if>
         </#list>
             <div class="space-4"></div>
-            <div class="col-md-12" th:insert="bk/button::save (@{/bk/${CLASS_NAME_LINK}/create})"/>
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-9" th:insert="bk/button::save (@{/bk/${CLASS_NAME_LINK}/create})"/>
+            </div>
         </form>
     </div>
 </div>
