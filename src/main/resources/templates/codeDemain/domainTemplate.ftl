@@ -24,6 +24,10 @@ public class ${CLASS_NAME} implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	<#list datas as data>
+    /**
+     *
+     *${data.columnComment}
+     */
 	<#if data.columnKey == "PRI">
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +35,6 @@ public class ${CLASS_NAME} implements Serializable {
 	<#if data.column_Name == "versionNum">
     @Version
 	</#if>
-	//${data.columnComment}
 	private ${data.data_Type} ${data.column_Name};
 		
 	public void set${data.methodName}(${data.data_Type} ${data.column_Name}) {
