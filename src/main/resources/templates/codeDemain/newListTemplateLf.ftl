@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="toolbar">
-                            <form th:action="@{/bk/${CLASS_NAME_LINK}/list}" id="objForm">
+                            <form th:action="@{/bk/${CLASS_NAME_LINK}/list}" id="objForm" class="form-horizontal">
                                 <div class="row">
                                 <#list inits as data>
                                     <#if data.data_Type == "Date">
@@ -98,6 +98,9 @@
                                 <!--/*/ </th:block> /*/-->
                                 </tbody>
                             </table>
+                            <div class="dataTables_wrapper dt-bootstrap4">
+                                <script th:replace="bk/pagination::page('datatables')"></script>
+                            </div>
                         </div>
                     </div>
                 </div>
