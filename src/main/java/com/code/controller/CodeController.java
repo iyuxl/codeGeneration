@@ -40,10 +40,10 @@ public class CodeController extends BaseController{
     }
 
     @RequestMapping("/save")
-    public @ResponseBody Object save(ColumnsList obj, HttpServletRequest request, boolean lf) {
+    public @ResponseBody Object save(ColumnsList obj, HttpServletRequest request, boolean lf, boolean lf_new) {
         ResultBean rb = new ResultBean(true, "");
         try {
-            columnsService.saveCode(obj, lf);
+            columnsService.saveCode(obj, lf, lf_new);
         } catch (Exception e) {
             LOG.error("生成代码异常", e);
             rb.setFlag(false);

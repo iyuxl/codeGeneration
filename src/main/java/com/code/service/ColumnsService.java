@@ -11,6 +11,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,6 +23,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +67,7 @@ public class ColumnsService {
         return lists;
     }
 
-    public void saveCode(ColumnsList obj, boolean leaf) throws Exception {
+    public void saveCode(ColumnsList obj, boolean leaf, boolean lf_new) throws Exception {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
         //cfg.setDirectoryForTemplateLoading(ResourceUtils.getFile("templates/codeDemain"));
         cfg.setClassLoaderForTemplateLoading(this.getClass().getClassLoader(), "/templates/codeDemain");
@@ -85,6 +87,8 @@ public class ColumnsService {
         }
         //TODO 生成Entity
         Template template = cfg.getTemplate("domainTemplate.ftl", "utf-8");
+        maps.put("D", DateFormatUtils.format(new Date(), "yyyy-MM-dd'T'HH:mm:ss"));
+        maps.put("author", System.getProperties().get("user.name"));
         maps.put("symbol", "$");
         maps.put("PACKAGE_NAME", obj.getPackageName());
         maps.put("CLASS_NAME", obj.getClassName());
@@ -98,24 +102,40 @@ public class ColumnsService {
         FileUtils.writeStringToFile(f, tempJava, "utf-8");
         System.out.println(obj.getClassName() + "Entity生成完毕");
         //TODO 生成Dao
-        template = cfg.getTemplate("daoTemplate.ftl", "utf-8");
+        template = cfg.getTemplate("newDaoTemplate.ftl", "utf-8");
         tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
         f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/repository/" + obj.getMk() + "/"  + obj.getClassName().trim() + "Dao.java");
         FileUtils.writeStringToFile(f, tempJava, "utf-8");
         System.out.println("Dao代码生成成功");
         //TODO 生成Service
         if (obj.isService()) {
-            template = cfg.getTemplate("serviceTemplate.ftl", "utf-8");
-            tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
-            f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/service/" + obj.getMk() + "/"  + obj.getClassName().trim() + "Service.java");
-            FileUtils.writeStringToFile(f, tempJava, "utf-8");
-            System.out.println("Service代码生成成功");
+            if (lf_new) {
+                template = cfg.getTemplate("newServiceTemplate.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/service/" + obj.getMk() + "/" + obj.getClassName().trim() + "Service.java");
+                FileUtils.writeStringToFile(f, tempJava, "utf-8");
+                //实现类
+                template = cfg.getTemplate("newServiceImplTemplate.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/service/" + obj.getMk() + "/impl/" + obj.getClassName().trim() + "ServiceImpl.java");
+                FileUtils.writeStringToFile(f, tempJava, "utf-8");
+                System.out.println("Service代码生成成功");
+            } else {
+                template = cfg.getTemplate("serviceTemplate.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/service/" + obj.getMk() + "/" + obj.getClassName().trim() + "Service.java");
+                FileUtils.writeStringToFile(f, tempJava, "utf-8");
+            }
         }
         //TODO 生成Controller
         if (obj.isController()) {
-            template = cfg.getTemplate("controllerTemplate.ftl", "utf-8");
+            if (lf_new) {
+                template = cfg.getTemplate("newControllerTemplate.ftl", "utf-8");
+            } else {
+                template = cfg.getTemplate("controllerTemplate.ftl", "utf-8");
+            }
             tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
-            f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/controller/" + obj.getMk() + "/"  + obj.getClassName().trim() + "Controller.java");
+            f = new File(outpath + StringUtils.replace(obj.getPackageName(), ".", "/") + "/controller/" + obj.getMk() + "/" + obj.getClassName().trim() + "Controller.java");
             FileUtils.writeStringToFile(f, tempJava, "utf-8");
             System.out.println("Controller代码生成成功");
         }
@@ -159,7 +179,11 @@ public class ColumnsService {
         }
         if (!lists.isEmpty()) {
             maps.put("lists", lists);
-            if (leaf) {
+            if (lf_new) {
+                template = cfg.getTemplate("newListTemplateLf.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/list.html");
+            } else if (leaf) {
                 template = cfg.getTemplate("listTemplate_lf.ftl", "utf-8");
                 tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
                 f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/list.html");
@@ -185,7 +209,11 @@ public class ColumnsService {
         }
         if (!adds.isEmpty()) {
             maps.put("adds", adds);
-            if (leaf) {
+            if (lf_new) {
+                template = cfg.getTemplate("newAddTemplateLf.ftl", "utf-8");
+                tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
+                f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/add.html");
+            } else if (leaf) {
                 template = cfg.getTemplate("addTemplate_lf.ftl", "utf-8");
                 tempJava = FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
                 f = new File(outpath + "/" + CommonUtil.geneUnKey(obj.getClassName()) + "/add.html");

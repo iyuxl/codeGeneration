@@ -5,7 +5,7 @@ import com.si.service.IService;
 
 /**
  * ${CLASS_NAME}业务接口类
- * Created by xiaoyaolan.
+ * @author ${author} on ${D}.
  */
 public interface I${CLASS_NAME}Service extends IService<${CLASS_NAME}> {
 }

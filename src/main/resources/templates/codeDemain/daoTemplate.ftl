@@ -7,5 +7,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import ${PACKAGE_NAME}.entity.${MK}.${CLASS_NAME};
 
+/**
+ * @author ${author} on ${D}.
+ * @desc ${CLASS_NAME} db操作类
+ */
 public interface ${CLASS_NAME}Dao extends PagingAndSortingRepository<${CLASS_NAME}, ${PRI}>, JpaSpecificationExecutor<${CLASS_NAME}>{
 }

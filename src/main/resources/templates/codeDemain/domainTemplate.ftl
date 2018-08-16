@@ -15,6 +15,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
+/**
+ * @author ${author} on ${D}.
+ * @desc
+ */
 @DynamicUpdate
 @DynamicInsert
 @Entity
