@@ -7,5 +7,5 @@ import com.si.service.IService;
  * ${CLASS_NAME}业务接口类
  * @author ${author} on ${D}.
  */
-public interface I${CLASS_NAME}Service extends IService<${CLASS_NAME}> {
+public interface ${CLASS_NAME}Service extends IService<${CLASS_NAME}> {
 }
